@@ -18,8 +18,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
 
-        <div className="navbar">
-          <ul className="alllinks">
+        <div className={styles.navbar}>
+          <Link href='/'><h1> bitbybit.com</h1></Link>
+          <ul >
             <Link href='/'><li className="navlinks">Home</li> </Link>
             <Link href='/about'><li className="navlinks">About</li> </Link>
             <Link href='/contact'><li className="navlinks">contact</li> </Link>
@@ -27,7 +28,6 @@ export default function Home() {
           </ul>
         </div>
         <div className={styles.description}>
-          <h1> bitbybit.com</h1>
           <a href='#'>the home of most simplified tech</a>
         </div>
 
