@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const Blog = () => {
+
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    console.log("useeffect is in action");
+    fetch('http://localhost:3000/api/blogs').then((a) => {
+      return a.json();
+    }).then((data) => {
+      console.log(data);
+      setBlogs(data)
+    })
+  }, [])
   return <div className=''>
     <main className=''>
-  <div>
-    <Link href={'/blogposts/learn-javascript'}>
-    <h3 className=''>How to learn JavaScript in 2022?</h3></Link>
-    <p>JavaScript is the language used to design logic for the web</p>
+      {blogs.map((eachblog) => {
+        return <div key={eachblog.slug}>
+          <Link href={`/blogposts/${eachblog.slug}`}>
+            <h3 className=''>{eachblog.title}</h3></Link>
+          <p>{eachblog.content.substr(0,150)}</p>
+        </div>
+      })}
+    </main>
   </div>
-  <div className="blogItem">
-    <h3>How to learn JavaScript in 2022?</h3>
-    <p>JavaScript is the language used to design logic for the web</p>
-  </div>
-  <div className="blogItem">
-    <h3>How to learn JavaScript in 2022?</h3>
-    <p>JavaScript is the language used to design logic for the web</p>
-  </div>
-  </main>
-</div>
 };
 
 export default Blog;
