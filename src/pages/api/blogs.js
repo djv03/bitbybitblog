@@ -1,10 +1,6 @@
 //---------->this file has function to read all the blogs from blogdata "directory" and render it on /api/blogs endpoint
 
-
 import * as fs from 'fs';
-
-
-console.log("form blogs.js");
 
 export default async function handler(req, res) {
 

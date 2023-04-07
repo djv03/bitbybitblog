@@ -4,9 +4,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
-
-console.log("form slug.js");
-
 const slug = () => {
     const [blog, setBlogs] = useState();
     const router = useRouter();
@@ -23,11 +20,16 @@ const slug = () => {
         })
     }, [router.isReady])
 
+    function createMarkup(c){
+        return {__html: c};
+    }
+      
+
     return <div className=''>
         <main className=''>
             <div>
-                <h3 className=''>{blog && blog.slug}</h3>
-                <p>{blog && blog.content}</p>
+                <h1 className=''>{blog && blog.slug}</h1>
+                {blog && <div  dangerouslySetInnerHTML={{__html: blog.content}}></div>}
             </div>
         </main>
     </div>

@@ -1,0 +1,1 @@
+//dangerrouslySetInnerHTML do the same thing as innerHTML but it is more secure and it is used when we want to render the html code inside the react component from the server side
