@@ -1,16 +1,33 @@
-import React from 'react';
+//------> this file has function to add dynamic routes to the in the /blogpost/[blogitem] endpoint
+//this is the file responsible for individual blog post page    
+
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
+
+console.log("form slug.js");
+
 const slug = () => {
+    const [blog, setBlogs] = useState();
     const router = useRouter();
-    const { slug } = router.query;
+
+    useEffect(() => {
+        if (!router.isReady) return;
+
+        const { slug } = router.query;
+        fetch(`http://localhost:3000/api/getblog?slug=${slug}`).then((fetchedblogs) => {
+
+            return fetchedblogs.json();
+        }).then((parsedblogs) => {
+            setBlogs(parsedblogs);
+        })
+    }, [router.isReady])
+
     return <div className=''>
-        <main className='slug-component'>
-            <h1>Title of the page: {slug}</h1>
-            <hr />
-            <div className='slug-content'>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem nulla repudiandae sint facilis, sunt corrupti numquam id illo. Ut deserunt animi iste voluptatum!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus maxime rem earum repudiandae, cum possimus quae assumenda nulla culpa. Odit architecto repellendus non, unde recusandae placeat nisi perferendis quod nesciunt! Dolorum sapiente et sint consequuntur earum blanditiis iusto reprehenderit molestiae quia eligendi? Exercitationem, officia nobis!
+        <main className=''>
+            <div>
+                <h3 className=''>{blog && blog.slug}</h3>
+                <p>{blog && blog.content}</p>
             </div>
         </main>
     </div>
